@@ -1,9 +1,9 @@
 pipeline{
-    agent {label 'sonar'}
+    agent any
     stages{
        stage('Git Checkout Stage'){
             steps{
-                git branch: 'main', url: 'https://github.com/sudheer76R/sonarqube-example.git'
+                git branch: 'main', url: 'https://github.com/chaithra0317/sonarqube-example.git'
             }
          }        
        stage('Build Stage'){
@@ -18,5 +18,10 @@ pipeline{
                 }
             }
         }
+        stage('deploy'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-server', path: '', url: 'http://13.200.246.69:8080/')], contextPath: null, war: '**/*.war'
+            }
+        }    
     }
 }
