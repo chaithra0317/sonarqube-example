@@ -23,8 +23,11 @@ pipeline{
      }
      stage('deploy'){
             steps{
-               sh 'sudo cp /home/ubuntu/workspace/sonar-demo/target/*.war /home/ec2-user/apache-tomcat-9.0.82/webapps'
-            }
+              sshagent(['ssh']) {
+           // some block
+              sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@13.200.246.69:/opt/tomcat/apache-tomcat-9.0.82/webapps/'
+             }
+           }
         }    
     }
 }
