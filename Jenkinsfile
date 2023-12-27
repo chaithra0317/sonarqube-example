@@ -23,11 +23,8 @@ pipeline{
      }
      stage('deploy'){
             steps{
-              sshagent(['ssh']) {
-           // some block
-              sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@13.200.246.69:/opt/tomcat/apache-tomcat-9.0.82/webapps/'
-             }
+            deploy adapters: [tomcat9(credentialsId: 'war-deployer', path: '', url: 'http://13.200.246.69:8080/')], contextPath: null, war: '**/*.war'
            }
-        }    
+     }    
     }
 }
