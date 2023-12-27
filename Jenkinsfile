@@ -13,8 +13,15 @@ pipeline{
             steps{
                 sh 'mvn clean install'
             }
-      }
-        stage('deploy'){
+      }       
+      stage('SonarQube Analysis Stage') {
+            steps{
+                withSonarQubeEnv('sonar') { 
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=demo-sonar"
+                }
+            }
+     }
+     stage('deploy'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: 'tomcat-server', path: '', url: 'http://13.200.246.69:8080/')], contextPath: null, war: '**/*.war'
             }
