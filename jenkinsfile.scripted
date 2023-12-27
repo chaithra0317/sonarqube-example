@@ -10,7 +10,7 @@ node('sonar') {
        }       
        stage('SonarQube Analysis Stage') {
                 withSonarQubeEnv('sonar') { 
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=sonar-jenkins"
+                    sh "mvn sonar:sonar"
                 }
        }
        stage('deploy'){
