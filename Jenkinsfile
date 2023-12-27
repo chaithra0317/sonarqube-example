@@ -23,7 +23,9 @@ pipeline{
      }
      stage('deploy'){
             steps{
-            deploy adapters: [tomcat9(credentialsId: 'war-deployer', path: '', url: 'http://13.200.246.69:8080/')], contextPath: null, war: '**/*.war'
+                sshagent(['deploy.war']) {
+                sh "scp -o StrictHostKeyChecking=no /home/ubuntu/workspace/sonar-demo/target/MyWebApp.war ec2-user@13.200.246.69:/opt/apache-tomcat-9.0.82/webapps"
+              }
            }
      }    
     }
