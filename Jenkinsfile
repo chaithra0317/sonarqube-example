@@ -1,5 +1,5 @@
 pipeline{
-    agent {label: sonar}
+    agent {label 'sonar'}
     tools {
         maven 'maven'
     }    
