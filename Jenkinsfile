@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+        maven 'maven'
+    }    
     stages{
        stage('Git Checkout Stage'){
             steps{
@@ -8,7 +11,7 @@ pipeline{
          }        
        stage('Build Stage'){
             steps{
-                sh 'mvn clean install -Dmaven.test.skip=true'
+                sh 'mvn clean install'
             }
          }
         stage('SonarQube Analysis Stage') {
