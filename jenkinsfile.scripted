@@ -1,5 +1,4 @@
-node {
-    agent {label 'sonar'}
+node('sonar') {
     tools {
         maven 'maven'
     }    
