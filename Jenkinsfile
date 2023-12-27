@@ -23,7 +23,7 @@ pipeline{
      }
      stage('deploy'){
             steps{
-               sh 'sudo cp /home/ubuntu/workspace/sonar-demo/target/*.warr /opt/tomcat/webapps/'
+               sh 'sudo cp /home/ubuntu/workspace/sonar-demo/target/*.war /opt/tomcat/webapps/'
             }
         }    
     }
